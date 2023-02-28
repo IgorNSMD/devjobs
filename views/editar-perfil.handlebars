@@ -1,8 +1,8 @@
 <main class="contenedor">
-    <form action="/editar-perfil" method="POST" class="default-form" enctype="multipart/form-data">
+    <form action="/editar-perfil" method="POST" class="default-form" enctype="application/json">
         <div class="campo">
             <label>Nombre</label>
-            <input value={{usuario.nombre}} type="text" name="nombre" placeholder="Tu Nombre">
+            <input value="{{usuario.nombre}}" type="text" name="nombre" placeholder="Tu Nombre">
         </div>
         <div class="campo">
             <label>E-mail</label>
