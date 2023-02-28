@@ -26,7 +26,7 @@ app.use(bodyParse.urlencoded({extended:true}));
 // Habilitar express-handlebars como view
 app.engine('handlebars',
     exphbs.engine({
-        defaultLayout:'layout',
+        defaultLayout: 'layout',
         helpers:require('./helpers/handlebars')
     }));
 
