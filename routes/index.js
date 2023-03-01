@@ -9,12 +9,13 @@ module.exports = ()=> {
     router.get('/', homeController.MostrarTrabajos )
 
     // Crear Vacante
-    router.get('/vacantes/nuevas',
+    router.get('/vacantes/nueva',
     authController.verificarUsuario,    
     vacantesController.formularioNuevaVacante)
 
-    router.post('/vacantes/nuevas',
+    router.post('/vacantes/nueva',
     authController.verificarUsuario,    
+    vacantesController.validarVacante,    
     vacantesController.agregarVacante)
 
     // Mostrar Vacantes (singular)
@@ -27,6 +28,7 @@ module.exports = ()=> {
     
     router.post('/vacantes/editar/:url', 
         authController.verificarUsuario,    
+        vacantesController.validarVacante,          
         vacantesController.editarVacante
     );
 

@@ -42,9 +42,9 @@ exports.cerrarSesion = (req, res, next ) => {
         if (err) { 
           return next(err); 
           }
-        res.redirect('/');
+        return res.redirect('/');
       });
-      
+
     req.flash('correcto', 'Cerraste Sesión Correctamente');
     return res.redirect('/iniciar-sesion');
 }
