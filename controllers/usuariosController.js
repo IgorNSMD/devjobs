@@ -1,5 +1,26 @@
 const mongoose = require('mongoose');
 const Usuarios = mongoose.model('Usuarios');
+const multer = require('multer');
+
+exports.subirImagen = (req, res, next) => {
+    upload(req, res, function(error) {
+        if(error) {
+            if(error instanceof multer.MulterError) {
+                if(error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El archivo es muy grande: Máximo 100kb ');
+                } else {
+                    req.flash('error', error.message);
+                }
+            } else {
+                req.flash('error', error.message);
+            }
+            res.redirect('/administracion');
+            return;
+        } else {
+            return next();
+        }
+    });
+}
 
 exports.formCrearCuenta = (req, res) => {
     res.render('crear-cuenta', {
