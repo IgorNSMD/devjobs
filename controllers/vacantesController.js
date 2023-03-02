@@ -108,3 +108,42 @@ exports.validarVacante = (req, res, next) => {
 
     next(); // siguiente middleware
 }
+
+exports.eliminarVacante = async (req, res) => {
+    
+    res.status(200).send('Vacante Eliminada Correctamente');
+    
+
+    console.log("inicio...");
+    const {id} = req.params;
+    console.log(id);
+
+    const vacante = await Vacante.findById(id);
+
+    //console.log(vacante);
+
+
+    if(verificarAutor(vacante, req.user.toObject())){
+        // Todo bien, si es el usuario, eliminar
+        console.log("Antes de Eliminar 333...");
+        await vacante.deleteOne();
+        console.log("Despues de Eliminar 44..");
+        res.status(200)
+        console.log("Despues de estatus 2000");
+        //res.send('Vacante Eliminada Correctamente');
+        console.log("Despuesde enviar el mensaje...");
+    } else {
+        // no permitido
+        res.status(403).send('Error')
+    }
+
+
+    
+}
+
+const verificarAutor = (vacante = {}, usuario = {}) => {
+    if(!vacante.autor.equals(usuario._id)) {
+        return false
+    } 
+    return true;
+}
